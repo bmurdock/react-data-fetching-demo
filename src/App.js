@@ -1,26 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
+import settings from './settings';
+import Card from './components/Card';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+// an app that will display a random pokemon (with info and a picture)
+// a button that the user can push to get a new random pokemon
+class App extends React.Component {
+  constructor()
+  {
+    super();
+    this.state = {
+      displayedPokemon: {},
+    }
+  }
+
+  getRandomPokemon = async () =>
+  {
+      // need to get a random WHOLE number between 1 and xxxxx
+      const number = Math.floor((Math.random() * 100)) + 1;
+
+      const pokemonUrl = `${settings.apiBaseRoute}/pokemon/${number}`;
+      const data = await fetch(pokemonUrl).then((response) => response.json());
+      // const data = fetch(pokemonUrl).then((respnose) => {return response.json()});
+      console.log(data);
+      this.setState({
+        displayedPokemon: data,
+      });
+  }
+
+  componentDidMount()
+  {
+    this.getRandomPokemon();
+  }
+
+  render()
+  {
+    return (
+      <div className='main'>
+        <Card {...this.state.displayedPokemon} />
+      </div>
+    )
+  }
 }
 
 export default App;
