@@ -7,7 +7,7 @@ const RC = React.Component;
 function CardBorder(props)
 {
     return (
-        <div className="cardBorder">
+        <div className={`cardBorder ${props.type}`}>
             {props.children}
         </div>
     )
@@ -40,18 +40,26 @@ class Card extends RC
     render()
     {
         let image;
+        let type;
         if (this.props.sprites)
         {
             image = <CardImage image={this.props.sprites.front_default} />
+            type = this.props.types[0].type.name;
         }
         else
         {
-            image = '';
+            image = type = '';
         }
+
+        console.log('type: ', type);
+
+
         return (
-            <CardBorder>
+            <CardBorder type={type} >
                 <CardTitle name={this.props.name} />
                 {image}
+                <div>Height: {this.props.height}, Weight: {this.props.weight}</div>
+                <div>{type}</div>
             </CardBorder>
         )
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import settings from './settings';
 import Card from './components/Card';
+import Header from './components/Header';
 import './App.css';
 
 
@@ -34,6 +35,7 @@ class App extends React.Component {
       const pokemonUrl = `${settings.apiBaseRoute}/pokemon/${number}`;
       const data = await fetch(pokemonUrl).then((response) => response.json());
 
+      console.log('data: ', data);
       this.setState({
         displayedPokemon: data,
       });
@@ -60,7 +62,11 @@ class App extends React.Component {
   {
     return (
       <div className='main'>
+        <Header />
         <Card {...this.state.displayedPokemon} />
+        <section className="controls">
+          <button onClick={this.getRandomPokemon}>Get Random</button>
+        </section>
       </div>
     )
   }
