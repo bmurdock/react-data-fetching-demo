@@ -1,7 +1,7 @@
 .cardBorder {
-    width: calc(2.48 * 100px);
-    height: calc(3.46 * 100px);
-    border: 5px solid #FCCD12;
+    width: calc(2.48 * 127px);
+    height: calc(3.46 * 127px);
+    border: calc(.10 * 127px) solid #FCCD12;
     border-radius: 5px;
 }
 
@@ -13,7 +13,7 @@
 .cardImage
 {
     width: 100%;
-    height: 100px;
+    height: calc(1.45 * 127px);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
